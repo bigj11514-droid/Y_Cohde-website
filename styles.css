@@ -328,6 +328,19 @@ body {
   font-size: 0.92rem;
 }
 
+
+.gallery-cont{
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+img{
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
+}
+
 @media (max-width: 900px) {
   .page-shell {
     padding: 18px;
@@ -356,5 +369,14 @@ body {
   .contact-panel,
   .contact-form {
     padding: 22px;
+  }
+  .gallery-cont{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  img{
+    margin-bottom: 20px;
+    width: 100%;
   }
 }
