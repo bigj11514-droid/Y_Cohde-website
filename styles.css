@@ -130,7 +130,21 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
+}
+
+.hero-note {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.section-actions {
+  margin-top: 22px;
+}
+
+.section-actions .btn {
+  min-width: 220px;
 }
 
 .btn {
