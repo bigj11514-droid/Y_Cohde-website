@@ -70,14 +70,26 @@ function updateEstimate() {
     portfolio: 'Portfolio website',
     school: 'School website',
     restaurant: 'Restaurant website',
-    ecommerce: 'E-commerce store'
+    ecommerce: 'E-commerce store',
+    business: 'Business website',
+    realestate: 'Real estate website',
+    healthcare: 'Healthcare website',
+    consulting: 'Consulting website',
+    event: 'Event website',
+    blog: 'Blog / personal brand website'
   };
 
   const baseCosts = {
     portfolio: 3200,
     school: 4200,
     restaurant: 4500,
-    ecommerce: 6200
+    ecommerce: 6200,
+    business: 3800,
+    realestate: 5000,
+    healthcare: 5600,
+    consulting: 4200,
+    event: 3600,
+    blog: 2800
   };
 
   const levelMultipliers = {
