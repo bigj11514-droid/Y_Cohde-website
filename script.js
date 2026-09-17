@@ -177,3 +177,97 @@ document.addEventListener('keydown', function (event) {
     closeLightbox();
   }
 });
+
+const projectModal = document.getElementById('projectModal');
+const projectModalImage = document.getElementById('projectModalImage');
+const projectModalTitle = document.getElementById('projectModalTitle');
+const projectModalPurpose = document.getElementById('projectModalPurpose');
+const projectModalLink = document.getElementById('projectModalLink');
+const openPayment = document.getElementById('openPayment');
+const paymentModal = document.getElementById('paymentModal');
+const paymentModalTitle = document.getElementById('paymentModalTitle');
+const paymentContinue = document.getElementById('paymentContinue');
+const paymentMethods = document.querySelectorAll('.payment-method');
+let selectedProject = '';
+let selectedPaymentMethod = '';
+
+function closeProjectModal() {
+  projectModal?.classList.remove('active');
+  projectModal?.setAttribute('aria-hidden', 'true');
+}
+
+function closePaymentModal() {
+  paymentModal?.classList.remove('active');
+  paymentModal?.setAttribute('aria-hidden', 'true');
+}
+
+function openProjectModal(card) {
+  const image = card.querySelector('img');
+  const title = card.querySelector('h3');
+  const description = card.querySelector('.project-info > p:not(.project-kicker)');
+  const firstLink = card.querySelector('.project-links a');
+  if (!image || !title || !description || !projectModal) return;
+
+  selectedProject = title.textContent.trim();
+  projectModalImage.src = image.currentSrc || image.src;
+  projectModalImage.alt = image.alt;
+  projectModalTitle.textContent = selectedProject;
+  projectModalPurpose.textContent = description.textContent.trim();
+  projectModalLink.href = firstLink?.href || '#inquiry';
+  projectModalLink.target = projectModalLink.href.includes('#') ? '_self' : '_blank';
+  projectModalLink.textContent = firstLink?.textContent.trim() || 'Discuss this project ↗';
+  projectModal.classList.add('active');
+  projectModal.setAttribute('aria-hidden', 'false');
+}
+
+document.querySelectorAll('.portfolio-grid .project-card').forEach((card) => {
+  card.classList.add('is-project-trigger');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', `View details for ${card.querySelector('h3')?.textContent.trim() || 'project'}`);
+
+  card.addEventListener('click', (event) => {
+    if (event.target.closest('a, button')) return;
+    openProjectModal(card);
+  });
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openProjectModal(card);
+    }
+  });
+});
+
+document.querySelectorAll('[data-close-project-modal]').forEach((button) => button.addEventListener('click', closeProjectModal));
+document.querySelectorAll('[data-close-payment-modal]').forEach((button) => button.addEventListener('click', closePaymentModal));
+
+openPayment?.addEventListener('click', () => {
+  closeProjectModal();
+  selectedPaymentMethod = '';
+  paymentContinue.disabled = true;
+  paymentMethods.forEach((method) => {
+    method.classList.remove('selected');
+    method.setAttribute('aria-checked', 'false');
+  });
+  paymentModalTitle.textContent = `Pay for ${selectedProject}`;
+  paymentModal.classList.add('active');
+  paymentModal.setAttribute('aria-hidden', 'false');
+});
+
+paymentMethods.forEach((method) => {
+  method.addEventListener('click', () => {
+    selectedPaymentMethod = method.dataset.paymentMethod;
+    paymentMethods.forEach((item) => {
+      const isSelected = item === method;
+      item.classList.toggle('selected', isSelected);
+      item.setAttribute('aria-checked', String(isSelected));
+    });
+    paymentContinue.disabled = false;
+  });
+});
+
+paymentContinue?.addEventListener('click', () => {
+  if (!selectedProject || !selectedPaymentMethod) return;
+  const message = `Hello Y_Cohde, I want to purchase ${selectedProject}.\nPayment method: ${selectedPaymentMethod}.\nPlease send me the secure payment link and next steps.`;
+  openWhatsApp(message);
+});

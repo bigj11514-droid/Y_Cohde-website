@@ -681,6 +681,35 @@
         <img class="lightbox-img" id="lightboxImage" src="" alt="" />
         <div class="lightbox-caption" id="lightboxCaption"></div>
       </div>
+      <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+        <div class="modal-backdrop" data-close-project-modal></div>
+        <div class="project-modal-panel">
+          <button class="modal-close" type="button" aria-label="Close project details" data-close-project-modal>×</button>
+          <img id="projectModalImage" src="" alt="" />
+          <div class="project-modal-content">
+            <p class="section-label">Project details</p>
+            <h2 id="projectModalTitle"></h2>
+            <p id="projectModalPurpose"></p>
+            <a id="projectModalLink" class="modal-project-link" href="#" target="_blank" rel="noreferrer">View project ↗</a>
+            <button id="openPayment" class="btn primary-btn" type="button">Purchase / request this project <span>↗</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="payment-modal" id="paymentModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="paymentModalTitle">
+        <div class="modal-backdrop" data-close-payment-modal></div>
+        <div class="payment-panel">
+          <button class="modal-close" type="button" aria-label="Close payment options" data-close-payment-modal>×</button>
+          <p class="section-label">Secure purchase request</p>
+          <h2 id="paymentModalTitle">Choose how you want to pay</h2>
+          <p class="payment-copy">Select a payment method. We will send your secure payment link and setup details straight away.</p>
+          <div class="payment-methods" role="radiogroup" aria-label="Payment method">
+            <button class="payment-method" type="button" data-payment-method="Card" role="radio" aria-checked="false"><span class="payment-icon">▣</span><span><strong>Card</strong><small>Visa, Mastercard or debit card</small></span></button>
+            <button class="payment-method" type="button" data-payment-method="Mobile Money" role="radio" aria-checked="false"><span class="payment-icon">◉</span><span><strong>Mobile Money</strong><small>Pay securely with MoMo</small></span></button>
+          </div>
+          <button id="paymentContinue" class="btn primary-btn" type="button" disabled>Continue to secure payment <span>↗</span></button>
+          <p class="payment-note">No card or mobile-money details are collected on this website.</p>
+        </div>
+      </div>
 
       <footer class="site-footer">
         <p>

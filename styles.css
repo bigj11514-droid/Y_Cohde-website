@@ -859,6 +859,39 @@ body {
 @media (max-width: 760px) { .category-benefits, .category-project-card { grid-template-columns: 1fr; } .category-project-card > img { height: 230px; min-height: 0; } .category-project-card .project-info { padding: 2px 7px 10px; } }
 @media (max-width: 480px) { .business-path-grid { grid-template-columns: 1fr; } .business-path-card { min-height: 190px; } }
 
+/* Project preview and payment-choice overlays */
+.is-project-trigger { cursor: pointer; }
+.project-modal,
+.payment-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 22px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility .2s ease; }
+.project-modal.active,
+.payment-modal.active { opacity: 1; visibility: visible; pointer-events: auto; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(2, 4, 8, .88); backdrop-filter: blur(9px); }
+.project-modal-panel,
+.payment-panel { position: relative; z-index: 1; width: min(900px, 100%); max-height: min(720px, calc(100vh - 44px)); overflow: auto; border: 1px solid rgba(var(--accent-rgb), .38); border-radius: 18px; background: linear-gradient(135deg, #172012, #0e141d 52%, #111923); box-shadow: 0 30px 90px rgba(0,0,0,.65); }
+.project-modal-panel { display: grid; grid-template-columns: minmax(280px, .92fr) 1.08fr; }
+.project-modal-panel > img { width: 100%; height: 100%; min-height: 420px; object-fit: cover; object-position: top center; }
+.project-modal-content { padding: 50px 42px 38px; display: flex; flex-direction: column; align-items: flex-start; }
+.project-modal-content h2,
+.payment-panel h2 { margin: 0 0 16px; font-size: clamp(2rem, 4vw, 3.3rem); letter-spacing: -.065em; line-height: .95; }
+.project-modal-content > p:not(.section-label) { margin: 0 0 24px; max-width: 450px; color: var(--muted); line-height: 1.7; }
+.modal-close { position: absolute; z-index: 3; top: 14px; right: 14px; display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; background: rgba(4,7,10,.78); color: #fff; cursor: pointer; font-size: 1.55rem; line-height: 1; }
+.modal-project-link { margin-bottom: 22px; color: var(--accent); font-size: .86rem; font-weight: 800; text-decoration: none; }
+.project-modal-content .btn { margin-top: auto; }
+.payment-panel { width: min(540px, 100%); padding: 46px 38px 30px; }
+.payment-copy { margin: -5px 0 24px; color: var(--muted); line-height: 1.6; }
+.payment-methods { display: grid; gap: 10px; margin-bottom: 22px; }
+.payment-method { display: flex; align-items: center; gap: 14px; width: 100%; padding: 15px; text-align: left; border: 1px solid rgba(255,255,255,.14); border-radius: 11px; background: rgba(255,255,255,.035); color: var(--text); cursor: pointer; transition: .2s ease; }
+.payment-method:hover,
+.payment-method.selected { border-color: var(--accent); background: rgba(var(--accent-rgb), .10); }
+.payment-icon { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 9px; background: rgba(var(--accent-rgb), .15); color: var(--accent); font-size: 1.3rem; }
+.payment-method strong,
+.payment-method small { display: block; }
+.payment-method small { margin-top: 3px; color: var(--muted); font-size: .72rem; }
+.payment-panel .btn { width: 100%; }
+.payment-panel .btn:disabled { cursor: not-allowed; opacity: .42; filter: grayscale(1); }
+.payment-note { margin: 13px 0 0; color: var(--muted); font-size: .72rem; text-align: center; }
+@media (max-width: 640px) { .project-modal, .payment-modal { padding: 14px; } .project-modal-panel { grid-template-columns: 1fr; } .project-modal-panel > img { height: 220px; min-height: 0; } .project-modal-content, .payment-panel { padding: 44px 23px 25px; } }
+
 @media (max-width: 760px) {
   .page-shell { padding: 17px 20px; }
   .site-header { padding: 9px 0 34px; flex-direction: row; align-items: center; }
