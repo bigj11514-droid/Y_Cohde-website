@@ -913,6 +913,49 @@ body::after {
 .payment-note { margin: 13px 0 0; color: var(--muted); font-size: .72rem; text-align: center; }
 @media (max-width: 640px) { .project-modal, .payment-modal { padding: 14px; } .project-modal-panel { grid-template-columns: 1fr; } .project-modal-panel > img { height: 220px; min-height: 0; } .project-modal-content, .payment-panel { padding: 44px 23px 25px; } }
 
+/* Portfolio side navigation */
+.aside-profile { display: none; }
+@media (min-width: 1025px) {
+  .page-shell {
+    max-width: 1680px;
+    margin: 0 auto;
+    padding: 28px 44px 28px 310px;
+  }
+  .site-header {
+    position: fixed;
+    z-index: 80;
+    top: 24px;
+    bottom: 24px;
+    left: max(22px, calc((100vw - 1680px) / 2 + 22px));
+    width: 244px;
+    padding: 24px 17px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border: 1px solid rgba(var(--accent-rgb), .22);
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(20,31,29,.93), rgba(7,11,18,.94));
+    box-shadow: inset 0 1px rgba(255,255,255,.09), 0 20px 60px rgba(0,0,0,.32);
+    backdrop-filter: blur(18px);
+  }
+  .site-header::after { content: ""; position: absolute; left: 0; right: 0; top: 95px; height: 1px; background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), .45), transparent); }
+  .brand { padding: 0 5px 24px; }
+  .nav-bar { display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding-top: 19px; }
+  .nav-bar a { padding: 11px 10px; font-size: .81rem; }
+  .nav-bar .nav-cta { margin: 13px 0 0; text-align: center; }
+  .aside-profile { display: block; margin-top: auto; padding: 18px 6px 2px; border-top: 1px solid rgba(255,255,255,.11); }
+  .aside-profile > span { color: var(--accent); font: 800 .59rem/1 ui-monospace, monospace; letter-spacing: .12em; }
+  .aside-profile p { margin: 10px 0 15px; color: var(--muted); font-size: .72rem; line-height: 1.5; }
+  .aside-profile div { display: flex; gap: 12px; }
+  .aside-profile a { color: #e5ecdd; font-size: .71rem; font-weight: 700; text-decoration: none; }
+  .aside-profile a:hover { color: var(--accent); }
+}
+
+@media (max-width: 1024px) {
+  .site-header { position: relative; }
+}
+
 @media (max-width: 760px) {
   .page-shell { padding: 17px 20px; }
   .site-header { padding: 9px 0 34px; flex-direction: row; align-items: center; }
