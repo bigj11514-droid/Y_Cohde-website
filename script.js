@@ -13,6 +13,28 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const lightboxCaption = document.getElementById('lightboxCaption');
 const lightboxClose = document.getElementById('lightboxClose');
+const menuToggle = document.getElementById('menuToggle');
+const siteNav = document.getElementById('siteNav');
+
+function setMenu(open) {
+  if (!menuToggle || !siteNav) return;
+  menuToggle.classList.toggle('is-open', open);
+  siteNav.classList.toggle('is-open', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+}
+
+menuToggle?.addEventListener('click', () => {
+  setMenu(!siteNav.classList.contains('is-open'));
+});
+
+siteNav?.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', () => setMenu(false));
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') setMenu(false);
+});
 
 function openWhatsApp(message) {
   const url = `https://wa.me/${encodeURIComponent(whatsappNumber)}?text=${encodeURIComponent(message)}`;
