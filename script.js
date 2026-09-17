@@ -165,15 +165,15 @@ function closeLightbox() {
   lightboxImage.src = '';
 }
 
-lightboxClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', function (event) {
+lightboxClose?.addEventListener('click', closeLightbox);
+lightbox?.addEventListener('click', function (event) {
   if (event.target === lightbox) {
     closeLightbox();
   }
 });
 
 document.addEventListener('keydown', function (event) {
-  if (event.key === 'Escape' && lightbox.classList.contains('active')) {
+  if (event.key === 'Escape' && lightbox?.classList.contains('active')) {
     closeLightbox();
   }
 });
@@ -254,6 +254,16 @@ openPayment?.addEventListener('click', () => {
   paymentModal.setAttribute('aria-hidden', 'false');
 });
 
+document.querySelectorAll('.buy-teacher-bot').forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    const card = button.closest('.project-card');
+    if (!card) return;
+    openProjectModal(card);
+    openPayment?.click();
+  });
+});
+
 paymentMethods.forEach((method) => {
   method.addEventListener('click', () => {
     selectedPaymentMethod = method.dataset.paymentMethod;
@@ -270,4 +280,11 @@ paymentContinue?.addEventListener('click', () => {
   if (!selectedProject || !selectedPaymentMethod) return;
   const message = `Hello Y_Cohde, I want to purchase ${selectedProject}.\nPayment method: ${selectedPaymentMethod}.\nPlease send me the secure payment link and next steps.`;
   openWhatsApp(message);
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closeProjectModal();
+    closePaymentModal();
+  }
 });

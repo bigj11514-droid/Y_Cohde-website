@@ -660,17 +660,37 @@ body {
 html { scroll-behavior: smooth; }
 
 body {
-  background: #06080e;
-  background-image:
-    radial-gradient(circle at 78% 9%, rgba(var(--accent-rgb), 0.10), transparent 24rem),
-    radial-gradient(circle at 9% 48%, rgba(47, 106, 255, 0.12), transparent 27rem),
-    linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px);
-  background-size: auto, auto, 42px 42px, 42px 42px;
-  background-attachment: fixed;
+  overflow-x: hidden;
+  background: #03050b;
+  background-image: radial-gradient(circle at 50% -25%, #172a53 0, #080e1c 40%, #03050b 78%);
 }
 
-.page-shell { max-width: 1320px; padding: 20px 34px; }
+body::before,
+body::after { content: ""; position: fixed; inset: 0; pointer-events: none; }
+body::before {
+  z-index: 0;
+  opacity: .8;
+  background:
+    radial-gradient(ellipse 36% 29% at 9% 18%, rgba(78, 69, 255, .28), transparent 72%),
+    radial-gradient(ellipse 32% 25% at 87% 15%, rgba(183, 255, 60, .18), transparent 72%),
+    radial-gradient(ellipse 32% 30% at 55% 88%, rgba(0, 183, 255, .14), transparent 72%);
+  filter: blur(12px);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+body::after {
+  z-index: 0;
+  opacity: .2;
+  background-image: linear-gradient(rgba(187, 226, 255, .14) 1px, transparent 1px), linear-gradient(90deg, rgba(187, 226, 255, .14) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, #000, transparent 78%);
+}
+
+@keyframes aurora-drift {
+  from { transform: scale(1) translate3d(-1%, -1%, 0); filter: blur(12px) hue-rotate(0deg); }
+  to { transform: scale(1.12) translate3d(2%, 2%, 0); filter: blur(21px) hue-rotate(18deg); }
+}
+
+.page-shell { position: relative; z-index: 1; max-width: 1320px; padding: 20px 34px; }
 
 .site-header { position: relative; padding: 15px 0 46px; z-index: 20; }
 
@@ -697,8 +717,9 @@ body {
 .hero-copy { max-width: none; padding: 0; border: 0; box-shadow: none; background: transparent; }
 .eyebrow { color: #d6ddce; letter-spacing: .15em; font-size: .69rem; font-weight: 700; display: flex; align-items: center; gap: 9px; }
 .pulse-dot { height: 7px; width: 7px; border-radius: 99px; background: var(--accent); box-shadow: 0 0 0 5px rgba(var(--accent-rgb), .12), 0 0 14px var(--accent); }
-.hero-copy h1 { font-size: clamp(3.4rem, 6vw, 6.4rem); max-width: 870px; letter-spacing: -.075em; line-height: .93; }
-.hero-copy h1 em { color: var(--accent); font-style: normal; }
+.hero-copy h1 { font-size: clamp(3.4rem, 6vw, 6.4rem); max-width: 870px; letter-spacing: -.075em; line-height: .93; text-wrap: balance; text-shadow: 0 0 45px rgba(174, 211, 255, .12); }
+.hero-copy h1 em { color: var(--accent); font-style: normal; text-shadow: 0 0 30px rgba(var(--accent-rgb), .26); }
+.hero-copy h1::selection, .hero-copy h1 em::selection { color: #081008; background: var(--accent); }
 .hero-text { max-width: 565px; font-size: 1.02rem; line-height: 1.75; }
 .hero-actions { align-items: center; margin: 30px 0 34px; }
 .btn { width: auto; border-radius: 9px; padding: 13px 19px; }
