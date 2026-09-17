@@ -64,6 +64,21 @@ if (serviceForm) {
   });
 }
 
+document.querySelectorAll('.service-cta[data-service]').forEach((link) => {
+  link.addEventListener('click', () => {
+    const projectTopic = document.getElementById('project-topic');
+    if (projectTopic) projectTopic.value = link.dataset.service;
+  });
+});
+
+const requestedService = new URLSearchParams(window.location.search).get('service');
+if (requestedService) {
+  const projectTopic = document.getElementById('project-topic');
+  if (projectTopic && [...projectTopic.options].some((option) => option.value === requestedService)) {
+    projectTopic.value = requestedService;
+  }
+}
+
 if (bookingForm) {
   bookingForm.addEventListener('submit', function (event) {
     event.preventDefault();
