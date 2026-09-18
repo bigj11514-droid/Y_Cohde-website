@@ -303,3 +303,16 @@ document.addEventListener('keydown', (event) => {
     closePaymentModal();
   }
 });
+
+const projectFilterButtons = document.querySelectorAll('.project-filters [data-filter]');
+const agencyProjects = document.querySelectorAll('.agency-project[data-category]');
+
+projectFilterButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    projectFilterButtons.forEach((item) => item.classList.toggle('is-active', item === button));
+    agencyProjects.forEach((project) => {
+      project.hidden = filter !== 'all' && !project.dataset.category.split(' ').includes(filter);
+    });
+  });
+});
