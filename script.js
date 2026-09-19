@@ -15,6 +15,28 @@ const lightboxCaption = document.getElementById('lightboxCaption');
 const lightboxClose = document.getElementById('lightboxClose');
 const menuToggle = document.getElementById('menuToggle');
 const siteNav = document.getElementById('siteNav');
+const teacherBotWelcome = document.getElementById('teacherBotWelcome');
+const pageShell = document.querySelector('.page-shell');
+
+function dismissTeacherBotWelcome() {
+  if (!teacherBotWelcome) return;
+  teacherBotWelcome.classList.add('is-dismissed');
+  teacherBotWelcome.setAttribute('aria-hidden', 'true');
+  pageShell?.removeAttribute('inert');
+}
+
+if (teacherBotWelcome) {
+  pageShell?.setAttribute('inert', '');
+  teacherBotWelcome.querySelector('[data-enter-teacher-bot]')?.addEventListener('click', dismissTeacherBotWelcome);
+  teacherBotWelcome.querySelector('[data-dismiss-teacher-bot]')?.addEventListener('click', dismissTeacherBotWelcome);
+  teacherBotWelcome.querySelector('[data-enter-teacher-bot]')?.focus();
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !teacherBotWelcome.classList.contains('is-dismissed')) {
+      dismissTeacherBotWelcome();
+    }
+  });
+}
 
 function setMenu(open) {
   if (!menuToggle || !siteNav) return;
